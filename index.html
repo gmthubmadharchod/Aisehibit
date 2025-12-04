@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Command Tester App</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f1f1f1; }
+        .box { background: white; padding: 20px; border-radius: 10px; }
+        input { width: 100%; padding: 10px; font-size: 16px; }
+        button { padding: 10px 20px; margin-top: 10px; }
+        pre { background: black; color: lime; padding: 15px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Advanced Aria2c Command Tester</h2>
+
+    <input id="url" placeholder="Enter URL to test..." />
+
+    <button onclick="test()">Test Command</button>
+
+    <h3>Generated CMD:</h3>
+    <pre id="cmd"></pre>
+
+    <h3>Result:</h3>
+    <pre id="result"></pre>
+</div>
+
+<script>
+function test() {
+    const url = document.getElementById("url").value;
+
+    fetch("https://your-render-domain.onrender.com/test", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("cmd").textContent = data.cmd;
+        document.getElementById("result").textContent = data.output || data.error;
+    });
+}
+</script>
+
+</body>
+      </html>
